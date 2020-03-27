@@ -9,7 +9,7 @@ import * as OT from '@opentok/client';
   providers: [ OpentokService ]
 })
 export class AppComponent implements OnInit {
-  title = 'Angular Video Chat Demo';
+  title = 'Angular Video Call Demo';
   session: OT.Session;
   streams: Array<OT.Stream> = [];
   changeDetectorRef: ChangeDetectorRef;
