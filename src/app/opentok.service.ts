@@ -19,6 +19,7 @@ export class OpentokService {
     if (config.API_KEY && config.TOKEN && config.SESSION_ID) {
       this.session = this.getOT().initSession(config.API_KEY, config.SESSION_ID);
       this.token = config.TOKEN;
+      debugger
       return Promise.resolve(this.session);
     } else {
       return fetch(config.SAMPLE_SERVER_BASE_URL + '/session')

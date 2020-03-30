@@ -13,7 +13,7 @@ export class AppComponent implements OnInit {
   title = 'Angular Tokbox Video Chat';
   callingText = 'Calling....';
   session: OT.Session;
-  // stream: OT.Stream;
+  //stream: OT.Stream;
   streams: Array<OT.Stream> = [];
 
   changeDetectorRef: ChangeDetectorRef;
@@ -37,7 +37,7 @@ export class AppComponent implements OnInit {
       this.session = session;
       this.session.on('streamCreated', (event) => {
         this.ngxService.stop();
-        this.streams[0] = event.stream;
+        this.streams.push(event.stream);
         this.changeDetectorRef.detectChanges();
       });
       this.session.on('streamDestroyed', (event) => {
