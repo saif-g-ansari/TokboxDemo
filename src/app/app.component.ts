@@ -1,6 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { OpentokService } from './opentok.service';
 import * as OT from '@opentok/client';
+import { NgxUiLoaderService } from 'ngx-ui-loader'; // Import NgxUiLoaderService
 
 @Component({
   selector: 'app-root',
@@ -10,18 +11,30 @@ import * as OT from '@opentok/client';
 })
 export class AppComponent implements OnInit {
   title = 'Angular Tokbox Video Chat';
+  callingText = 'Calling.... Mushrankhan';
   session: OT.Session;
   streams: Array<OT.Stream> = [];
   changeDetectorRef: ChangeDetectorRef;
+  isConnected=false;
 
-  constructor(private ref: ChangeDetectorRef, private opentokService: OpentokService) {
+  constructor(private ref: ChangeDetectorRef, private opentokService: OpentokService,private ngxService: NgxUiLoaderService) {
     this.changeDetectorRef = ref;
   }
 
   ngOnInit () {
+  
+  }
+
+
+  call()
+  {
+    this.ngxService.start();
     this.opentokService.initSession().then((session: OT.Session) => {
+     
+      this.isConnected=true;
       this.session = session;
       this.session.on('streamCreated', (event) => {
+        this.ngxService.stop();
         this.streams.push(event.stream);
         this.changeDetectorRef.detectChanges();
       });
@@ -39,4 +52,5 @@ export class AppComponent implements OnInit {
       alert('Unable to connect. Make sure you have updated the config.ts file with your OpenTok details.');
     });
   }
+  
 }

@@ -1,6 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 body, html {
-    background-color: gray;
+    background-color: white;
     height: 100%;
 }
 
@@ -28,4 +28,22 @@ body, html {
     z-index: 100;
     border: 3px solid white;
     border-radius: 3px;
+}
+
+.panel
+{
+    margin: 20px;
+}
+
+.OT_publisher 
+{
+    margin-top: 20px !important;
+}
+
+.OT_subscriber 
+{
+    margin-top: 20px !important;
+    margin-left: 10px !important;
+    height: 550px !important;
+    width: 550px !important;
 }

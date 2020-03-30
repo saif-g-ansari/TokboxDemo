@@ -6,6 +6,14 @@ import { AppComponent } from './app.component';
 import { PublisherComponent } from './publisher/publisher.component';
 import { SubscriberComponent } from './subscriber/subscriber.component';
 import { OpentokService } from './opentok.service';
+import { ngxUiLoaderConfig } from './loader.config';
+
+import {
+  NgxUiLoaderModule,
+} from 'ngx-ui-loader';
+
+
+
 
 @NgModule({
   declarations: [
@@ -14,7 +22,8 @@ import { OpentokService } from './opentok.service';
     SubscriberComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    NgxUiLoaderModule.forRoot(ngxUiLoaderConfig)  
   ],
   providers: [OpentokService],
   bootstrap: [AppComponent]
