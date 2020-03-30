@@ -7,35 +7,37 @@ import { NgxUiLoaderService } from 'ngx-ui-loader'; // Import NgxUiLoaderService
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  providers: [ OpentokService ]
+  providers: [OpentokService]
 })
 export class AppComponent implements OnInit {
   title = 'Angular Tokbox Video Chat';
-  callingText = 'Calling.... Mushrankhan';
+  callingText = 'Calling....';
   session: OT.Session;
+  // stream: OT.Stream;
   streams: Array<OT.Stream> = [];
-  changeDetectorRef: ChangeDetectorRef;
-  isConnected=false;
 
-  constructor(private ref: ChangeDetectorRef, private opentokService: OpentokService,private ngxService: NgxUiLoaderService) {
+  changeDetectorRef: ChangeDetectorRef;
+  isConnected = false;
+
+  constructor(private ref: ChangeDetectorRef, private opentokService: OpentokService, private ngxService: NgxUiLoaderService) {
     this.changeDetectorRef = ref;
   }
 
-  ngOnInit () {
-  
+  ngOnInit() {
+
   }
 
 
-  call()
-  {
+  call() {
+    
     this.ngxService.start();
     this.opentokService.initSession().then((session: OT.Session) => {
-     
-      this.isConnected=true;
+      
+      this.isConnected = true;
       this.session = session;
       this.session.on('streamCreated', (event) => {
         this.ngxService.stop();
-        this.streams.push(event.stream);
+        this.streams[0] = event.stream;
         this.changeDetectorRef.detectChanges();
       });
       this.session.on('streamDestroyed', (event) => {
@@ -46,11 +48,11 @@ export class AppComponent implements OnInit {
         }
       });
     })
-    .then(() => this.opentokService.connect())
-    .catch((err) => {
-      console.error(err);
-      alert('Unable to connect. Make sure you have updated the config.ts file with your OpenTok details.');
-    });
+      .then(() => this.opentokService.connect())
+      .catch((err) => {
+        console.error(err);
+        alert('Unable to connect. Make sure you have updated the config.ts file with your OpenTok details.');
+      });
   }
-  
+
 }

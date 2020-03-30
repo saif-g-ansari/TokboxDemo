@@ -1,7 +1,7 @@
 <div class="panel">
 
   <button class="btn btn-success" (click)="call()"  >
-    Call Mushrankhan
+    Call
     <img src="../assets/images/video_call-black-18dp.svg"> 
    
   </button>
@@ -9,7 +9,9 @@
   <ngx-ui-loader [text]="callingText" ></ngx-ui-loader>
   
   <div *ngIf="session">
+
     <app-publisher [session]="session"></app-publisher>
+    <!-- <app-subscriber  [stream]="streams" [session]="session"></app-subscriber> -->
     <app-subscriber *ngFor="let stream of streams" [stream]="stream" [session]="session"></app-subscriber>
     
   </div>
